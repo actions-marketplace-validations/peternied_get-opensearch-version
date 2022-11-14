@@ -1,0 +1,24 @@
+name: 'Get OpenSearch Version'
+
+description: 'Gets the OpenSearch version from gradle properties '
+
+inputs:
+  working-directory:
+    description: 'The working directory to run the gradle command'
+    default: .
+
+outputs:
+  version:
+    description: 'The OpenSearch version from gradle properties'
+    value: ${{ steps.get-version.outputs.version }}
+
+runs:
+  using: "composite"
+  steps:
+
+    - id: get-version
+      run: |
+        export extractedVersion=$(./gradlew properties -Dbuild.snapshot=false | grep ^version: | awk '{split($0, a, ": ");print a[2]}')
+        echo "::set-output name=version::$extractedVersion"
+      working-directory: ${{ inputs.working-directory }}
+      shell: bash
