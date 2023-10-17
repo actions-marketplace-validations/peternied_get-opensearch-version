@@ -19,6 +19,6 @@ runs:
     - id: get-version
       run: |
         export extractedVersion=$(./gradlew properties -Dbuild.snapshot=false | grep ^version: | awk '{split($0, a, ": ");print a[2]}')
-        echo "::set-output name=version::$extractedVersion"
+        echo "version=$extractedVersion" >> $GITHUB_OUTPUT
       working-directory: ${{ inputs.working-directory }}
       shell: bash

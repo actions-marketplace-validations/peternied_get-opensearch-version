@@ -19,8 +19,16 @@ outputs:
 ```yaml
 steps:
 - id: get-version 
-  uses: peternied/get-opensearch-version@v1
+  uses: peternied/get-opensearch-version@v2
   with:
     working-directory: project-subdirectory
 - run: echo "We are using OpenSearch version ${{ steps.get-version.outputs.version }} in this project"
 ```
+
+## Changlog
+
+## v2
+- Fix deprecated set-output commands
+
+## v1
+- Initial Release
